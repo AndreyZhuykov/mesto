@@ -13,4 +13,5 @@ Flex-box и Grid-box
 
 **Cсылка на GitHub Pages**
 
-https://andreyzhuykov.github.io/russian-travel/
+https://andreyzhuykov.github.io/mesto/
+
