@@ -1,0 +1,12 @@
+.page {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-width: 320px;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: inter;
+    color: #fff;
+    position: relative;
+}

@@ -1,0 +1,9 @@
+.element {
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 282px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
