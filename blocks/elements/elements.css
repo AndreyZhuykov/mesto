@@ -6,3 +6,12 @@
     grid-template-columns: repeat(auto-fit, 282px);
     justify-content: center;
 }
+
+
+
+@media screen and (max-width: 1050px) {
+    .elements {
+        padding-top: 36px;
+        gap: 20px;
+    }
+}
