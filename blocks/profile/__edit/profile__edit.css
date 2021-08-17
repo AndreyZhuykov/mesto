@@ -5,6 +5,9 @@
     height: 24px;
     border: 1px solid #fff;
     background-color: inherit;
+    background-image: url(../../../images/Vector.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     cursor: pointer;
     opacity: 1;
     transition: .2s;
@@ -18,7 +21,7 @@
     opacity: .6;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 1050px) {
     .profile__edit {
         width: 18px;
         height: 18px;

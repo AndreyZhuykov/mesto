@@ -9,7 +9,6 @@
     .profile {
         max-width: 282px;
         padding-top: 42px;
-        display: flex;
         flex-direction: column;
     }
 }

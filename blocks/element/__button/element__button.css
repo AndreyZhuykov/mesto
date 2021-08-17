@@ -5,6 +5,10 @@
     padding: 0;
     width: 22px;
     height: 19px;
+    background-image: url(../../../images/Vector3.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
     align-self: center;
     opacity: 1;
     transition: .2s;
@@ -12,5 +16,5 @@
 }
 
 .element__button:hover {
-    opacity: .6;
+    opacity: .5;
 }

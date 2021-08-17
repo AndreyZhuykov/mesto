@@ -10,8 +10,18 @@
     opacity: 1;
     transition: .2s;
     cursor: pointer;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .popup__save:hover {
-    opacity: .6;
+    opacity: .8;
+}
+
+@media screen and (max-width: 590px) {
+    .popup__save {
+        width: 238px;
+        font-size: 14px;
+        line-height: 17px;
+    }
 }
