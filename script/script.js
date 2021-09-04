@@ -19,17 +19,17 @@ const inputLink = popupAdd.querySelector('.popup__input_user_link');
 const openAdd = document.querySelector('.profile__add');
 
 
-function togglePopup(ModalWindow) {
+function togglePopup(popup) {
         nameInput.value = nameTitle.textContent;
         infoInput.value = infoText.textContent;
-        ModalWindow.classList.toggle('popup_active')
+        popup.classList.toggle('popup_active')
 }
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
     nameTitle.textContent = nameInput.value;
     infoText.textContent = infoInput.value;
-    togglePopup();
+    togglePopup(popupProfile);
 }
 
 function createNewCard(evt) {
@@ -39,11 +39,8 @@ function createNewCard(evt) {
         name: inputTitle.value,
         link: inputLink.value
     })
-
-    console.log(inputTitle.value, inputLink.value);
     
-    
-    togglePopup();
+    togglePopup(popupAdd);
 }
 
 openPopup.addEventListener('click', () => {
