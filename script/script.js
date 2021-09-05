@@ -20,6 +20,12 @@ const inputTitle = popupAdd.querySelector('.popup__input_user_title');
 const inputLink = popupAdd.querySelector('.popup__input_user_link');
 
 
+const elementTemplate = document.querySelector('#post').content.querySelector('.element');
+const elements = document.querySelector('.elements');
+const popupImage = document.querySelector('.popup_img');
+const closeImage = popupImage.querySelector('.popup__close');
+
+
 function openAnyPopup(popup) {
     popup.classList.add('popup_active')
 }
@@ -94,10 +100,6 @@ const initialCards = [{
     }
 ];
 
-const elementTemplate = document.querySelector('#post').content.querySelector('.element');
-const elements = document.querySelector('.elements');
-const popupImage = document.querySelector('.popup_img');
-const closeImage = popupImage.querySelector('.popup__close');
 
 function createCard(data) {
     const cardElement = elementTemplate.cloneNode(true);
