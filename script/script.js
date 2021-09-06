@@ -110,6 +110,7 @@ function createCard(data) {
     const popupImage = document.querySelector('.popup_img');
     const popupImageOpen = popupImage.querySelector('.popup__image');
     const popupText = popupImage.querySelector('.popup__text');
+    
 
 
     // Кнопка лайк
@@ -127,13 +128,14 @@ function createCard(data) {
         openAnyPopup(popupImage);
         popupImageOpen.src = elementIamge.src;
         popupText.textContent = data.name;
+        popupImageOpen.alt = data.name;
     });
 
 
     elementTitle.textContent = data.name;
     elementIamge.src = data.link;
-    // добавление alt 
     elementIamge.alt = data.name;
+    // добавление alt 
 
     return cardElement;
 }
