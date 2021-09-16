@@ -8,8 +8,16 @@
     padding-bottom: 13px;
 }
 
+.popup__input.popup__input_type_error {
+    margin-bottom: 10px;
+}
+
 .popup__input:last-of-type {
-    margin-bottom: 48px;
+    margin-bottom: 33px;
+}
+
+.popup__input:last-of-type.popup__input_type_error:last-of-type {
+    margin-bottom: 18px;
 }
 
 @media screen and (max-width: 590px) {
