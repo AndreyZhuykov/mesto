@@ -1,12 +1,13 @@
-/// функция добавления стилей Erorr 
+
+
+/// функция добавления стилей Error 
 const showInputError = (inputElement, erorrElement, inputErrorClass, errorClass) => {
     inputElement.classList.add(inputErrorClass);
     erorrElement.classList.add(errorClass);
     erorrElement.textContent = inputElement.validationMessage;
-    console.log(erorrElement)
 };
 
-/// функция удаления стилей Erorr 
+/// функция удаления стилей Error 
 const hideInputError = (inputElement, erorrElement, inputErrorClass, errorClass) => {
     inputElement.classList.remove(inputErrorClass);
     erorrElement.classList.remove(errorClass);
@@ -18,14 +19,6 @@ const hasInvalidInput = (inputList) => {
         return !inputElement.validity.valid;
     });
 };
-
-/// функция 
-
-const hasNotInputValues = (inputList) => {
-    return inputList.every(inputElement => {
-        return inputElement.value.lenght === 0;
-    })
-}
 
 /// функция проверки инпутов (тригер ошибки)
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
@@ -40,20 +33,22 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
 
 /// функция поведения кнопки в форме 
 const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiveButtonClass) => {
-    const bottomElement = formElement.querySelector(submitButtonSelector);
-    if (hasInvalidInput(inputList) || hasNotInputValues(inputList)) {
-        disableSubmitButton(bottomElement, inactiveButtonClass);
+    const buttonElement = formElement.querySelector(submitButtonSelector);
+    if (hasInvalidInput(inputList))  {
+        disableSubmitButton(buttonElement, inactiveButtonClass, submitButtonSelector);
     } else {
-        enableSubmitButton(bottomElement, inactiveButtonClass);
+        enableSubmitButton(buttonElement, inactiveButtonClass);
     }
 };
 
-const disableSubmitButton = (bottomElement, inactiveButtonClass) => {
-    bottomElement.classList.add(inactiveButtonClass);
+const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute("disabled", "disabled");
 };
 
-const enableSubmitButton = (bottomElement, inactiveButtonClass) => {
-    bottomElement.classList.remove(inactiveButtonClass);
+const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", "disabled");
 };
 
 /// функция проверки формы 
@@ -62,9 +57,7 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, inp
         event.preventDefault();
     });
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-    console.log()
     inputList.forEach(inputElement => {
-        console.log(errorClass);
         inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
             toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
