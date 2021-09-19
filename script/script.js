@@ -3,7 +3,7 @@ const profilePopup = document.querySelector('.popup_profile');
 const popupAdd = document.querySelector('.popup_add');
 const nameTitle = document.querySelector('.profile__title');
 const infoText = document.querySelector('.profile__text');
-const popup = document.querySelector('.popup');
+
 
 
 /// кнопки в попапе создания новой карточки 
