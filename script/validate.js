@@ -1,5 +1,3 @@
-
-
 /// функция добавления стилей Error 
 const showInputError = (inputElement, erorrElement, inputErrorClass, errorClass) => {
     inputElement.classList.add(inputErrorClass);
@@ -20,14 +18,20 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
+const hasNotInputValues = (inputList) => { 
+    return inputList.every(inputElement => { 
+        return inputElement.value.length === 0; 
+    }) 
+
+} 
+
 /// функция проверки инпутов (тригер ошибки)
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
     const erorrElement = formElement.querySelector(`#${inputElement.id}-error`);
-
-    if (!inputElement.validity.valid) {
-        showInputError(inputElement, erorrElement, inputErrorClass, errorClass);
-    } else {
+    if (inputElement.validity.valid) {
         hideInputError(inputElement, erorrElement, inputErrorClass, errorClass);
+    } else {
+        showInputError(inputElement, erorrElement, inputErrorClass, errorClass);
     }
 };
 
@@ -43,12 +47,12 @@ const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiv
 
 const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
     buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute("disabled", "disabled");
+    buttonElement.setAttribute("disabled");
 };
 
 const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
     buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute("disabled", "disabled");
+    buttonElement.removeAttribute("disabled");
 };
 
 /// функция проверки формы 
@@ -62,12 +66,9 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, inp
             checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
             toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
         });
-    });
-    
         toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
+    });
 };
-
-
 //// функция вызова валидации 
 const enableValidation = (config) => {
     const formList = document.querySelectorAll(config.formSelector);
@@ -81,8 +82,6 @@ const enableValidation = (config) => {
             config.inactiveButtonClass);
     });
 };
-
-
 /// обьект с данными 
 enableValidation({
     formSelector: '.popup__form',

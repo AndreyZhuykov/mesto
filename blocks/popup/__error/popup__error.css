@@ -3,6 +3,10 @@
     opacity: 1;
 }
 
+.popup__error:last-of-type.popup__error_visible {
+    margin: 0 34px 30px;
+}
+
 
 @media screen and (max-width: 590px) {
     .popup__error {

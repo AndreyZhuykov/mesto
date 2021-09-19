@@ -1,18 +1,18 @@
 const openProfilePopupButton = document.querySelector('.profile__edit');
 const profilePopup = document.querySelector('.popup_profile');
-const allPopups = document.querySelectorAll('.popup');
 const popupAdd = document.querySelector('.popup_add');
 const nameTitle = document.querySelector('.profile__title');
 const infoText = document.querySelector('.profile__text');
+const popup = document.querySelector('.popup');
 
 
 /// кнопки в попапе создания новой карточки 
-const openAddCardBotton = document.querySelector('.profile__add');
-const closeAddCardBotton = popupAdd.querySelector('.popup__close');
-const CreateNewCardBotton = popupAdd.querySelector('.popup__form');
+const openAddCardButton = document.querySelector('.profile__add');
+const closeAddCardButton = popupAdd.querySelector('.popup__close');
+const createNewCardButton = popupAdd.querySelector('.popup__form');
 // конпки в попапе редактирования профиля
 const closeProfilePopupButton = profilePopup.querySelector('.popup__close');
-const ProfilePopupForm = profilePopup.querySelector('.popup__form');
+const profilePopupForm = profilePopup.querySelector('.popup__form');
 
 /// инпуты форм
 const nameInput = profilePopup.querySelector('.popup__input_user_name');
@@ -23,18 +23,20 @@ const inputLink = popupAdd.querySelector('.popup__input_user_link');
 
 const elementTemplate = document.querySelector('#post').content.querySelector('.element');
 const elements = document.querySelector('.elements');
+
 const popupImage = document.querySelector('.popup_img');
+const popupImageOpen = popupImage.querySelector('.popup__image');
+const popupText = popupImage.querySelector('.popup__text');
 const closeImage = popupImage.querySelector('.popup__close');
 
 
-function openAnyPopup(allPopups) {
-    allPopups.classList.add('popup_active');
+function openAnyPopup(popup) {
+    popup.classList.add('popup_active');
     document.addEventListener('keydown', pressEscapeClosePopup);
-
 }
 
-function closeAnyPopup(allPopups) {
-    allPopups.classList.remove('popup_active');
+function closeAnyPopup(popup) {
+    popup.classList.remove('popup_active');
     document.removeEventListener('keydown', pressEscapeClosePopup);
 }
 
@@ -57,7 +59,7 @@ closeProfilePopupButton.addEventListener('click', () => {
     closeAnyPopup(profilePopup);
 });
 
-ProfilePopupForm.addEventListener('submit', formSubmitHandler);
+profilePopupForm.addEventListener('submit', formSubmitHandler);
 
 function createNewCard(evt) {
     evt.preventDefault();
@@ -70,11 +72,11 @@ function createNewCard(evt) {
     inputLink.value = '';
 }
 
-openAddCardBotton.addEventListener('click', () => {
+openAddCardButton.addEventListener('click', () => {
     openAnyPopup(popupAdd);
 });
 
-closeAddCardBotton.addEventListener('click', () => {
+closeAddCardButton.addEventListener('click', () => {
     closeAnyPopup(popupAdd);
 });
 
@@ -116,7 +118,7 @@ const pressEscapeClosePopup = (evt) => {
 
 
 // создание карточки 
-CreateNewCardBotton.addEventListener('submit', createNewCard);
+createNewCardButton.addEventListener('submit', createNewCard);
 
 
 
@@ -154,21 +156,17 @@ function createCard(data) {
     const elementTitle = cardElement.querySelector('.element__title');
     const elementLike = cardElement.querySelector('.element__button');
     const elementDelete = cardElement.querySelector('.element__delete');
-    const popupImage = document.querySelector('.popup_img');
-    const popupImageOpen = popupImage.querySelector('.popup__image');
-    const popupText = popupImage.querySelector('.popup__text');
-
 
 
     // Кнопка лайк
 
-    const handleLikeClick = () => {
-        elementLike.addEventListener('click', () => {
-            elementLike.classList.toggle('element__button_like-active');
-        });
-    };
+    function handleLikeClick() {
+        elementLike.classList.toggle('element__button_like-active');
+    } 
+    elementLike.addEventListener('click', handleLikeClick);
 
     // Удаление 
+
     elementDelete.addEventListener('click', () => {
         cardElement.remove();
     });
@@ -186,7 +184,6 @@ function createCard(data) {
     elementIamge.src = data.link;
     elementIamge.alt = data.name;
     // добавление alt 
-
     return cardElement;
 }
 
