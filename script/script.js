@@ -1,3 +1,9 @@
+import {
+    Card,
+    initialCards,
+    renderCard
+} from "./Card.js";
+
 const openProfilePopupButton = document.querySelector('.profile__edit');
 const profilePopup = document.querySelector('.popup_profile');
 const popupAdd = document.querySelector('.popup_add');
@@ -21,8 +27,6 @@ const inputTitle = popupAdd.querySelector('.popup__input_user_title');
 const inputLink = popupAdd.querySelector('.popup__input_user_link');
 
 
-const elementTemplate = document.querySelector('#post').content.querySelector('.element');
-const elements = document.querySelector('.elements');
 
 const popupImage = document.querySelector('.popup_img');
 const popupImageOpen = popupImage.querySelector('.popup__image');
@@ -61,16 +65,6 @@ closeProfilePopupButton.addEventListener('click', () => {
 
 profilePopupForm.addEventListener('submit', formSubmitHandler);
 
-function createNewCard(evt) {
-    evt.preventDefault();
-    renderCard({
-        name: inputTitle.value,
-        link: inputLink.value
-    })
-    closeAnyPopup(popupAdd);
-    inputTitle.value = '';
-    inputLink.value = '';
-}
 
 openAddCardButton.addEventListener('click', () => {
     openAnyPopup(popupAdd);
@@ -115,82 +109,44 @@ const pressEscapeClosePopup = (evt) => {
     }
 };
 
-
-
-// создание карточки 
-createNewCardButton.addEventListener('submit', createNewCard);
-
-
-
-// добавление карточек через js 
-const initialCards = [{
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-
-function createCard(data) {
-    const cardElement = elementTemplate.cloneNode(true);
-    const elementIamge = cardElement.querySelector('.element__image');
-    const elementTitle = cardElement.querySelector('.element__title');
-    const elementLike = cardElement.querySelector('.element__button');
-    const elementDelete = cardElement.querySelector('.element__delete');
-
-
-    // Кнопка лайк
-
-    function handleLikeClick() {
-        elementLike.classList.toggle('element__button_like-active');
-    } 
-    elementLike.addEventListener('click', handleLikeClick);
-
-    // Удаление 
-
-    elementDelete.addEventListener('click', () => {
-        cardElement.remove();
-    });
-
-    // Открытие попапа с картинкой 
-    elementIamge.addEventListener('click', () => {
-        popupImageOpen.src = elementIamge.src;
-        popupText.textContent = data.name;
-        popupImageOpen.alt = data.name;
-        openAnyPopup(popupImage);
-    });
-
-
-    elementTitle.textContent = data.name;
-    elementIamge.src = data.link;
-    elementIamge.alt = data.name;
-    // добавление alt 
-    return cardElement;
+// функция открытия попапа карточки 
+const handleCardImgClick = (evt) => {
+    popupImageOpen.src = evt.target.closest('.element__image').src;
+    popupText.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
+    popupImageOpen.alt = evt.target.closest('.element').querySelector('.element__title').textContent;
+    openAnyPopup(popupImage);
 }
 
-function renderCard(data) {
-    elements.prepend(createCard(data));
+// функция лайка
+const handleLikeClick = (evt) => {
+    evt.target.classList.toggle('element__button_like-active')
 }
+
+// функция удаления карточки  
+const handleDeleteClick = (evt) => {
+    evt.target.closest('.element').remove();
+}
+
 
 initialCards.forEach((data) => {
-    renderCard(data);
+    renderCard(data)
 });
+
+function createNewCard(evt) {
+    evt.preventDefault();
+    renderCard({
+        name: inputTitle.value,
+        link: inputLink.value
+    })
+    closeAnyPopup(popupAdd);
+    inputTitle.value = '';
+    inputLink.value = '';
+}
+
+createNewCardButton.addEventListener('submit', createNewCard);
+
+export {
+    handleLikeClick,
+    handleDeleteClick,
+    handleCardImgClick
+}
