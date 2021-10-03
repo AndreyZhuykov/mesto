@@ -1,10 +1,17 @@
 import {
     Card,
-    initialCards,
     renderCard
 } from "./Card.js";
 
-import { FormValidator } from "./FormValidator.js";
+import {
+    FormValidator
+} from "./FormValidator.js";
+
+import {
+    popupImage,
+    openAnyPopup,
+    closeAnyPopup
+} from "./utils.js";
 
 
 
@@ -31,30 +38,17 @@ const inputTitle = popupAdd.querySelector('.popup__input_user_title');
 const inputLink = popupAdd.querySelector('.popup__input_user_link');
 
 
-
-const popupImage = document.querySelector('.popup_img');
-const popupImageOpen = popupImage.querySelector('.popup__image');
-const popupText = popupImage.querySelector('.popup__text');
 const closeImage = popupImage.querySelector('.popup__close');
 
 
-function openAnyPopup(popup) {
-    popup.classList.add('popup_active');
-    document.addEventListener('keydown', pressEscapeClosePopup);
-}
 
-function closeAnyPopup(popup) {
-    popup.classList.remove('popup_active');
-    document.removeEventListener('keydown', pressEscapeClosePopup);
-}
-
-
-function formSubmitHandler(evt) {
+function submitProfileForm(evt) {
     evt.preventDefault();
     nameTitle.textContent = nameInput.value;
     infoText.textContent = infoInput.value;
     closeAnyPopup(profilePopup);
 }
+
 
 openProfilePopupButton.addEventListener('click', () => {
     nameInput.value = nameTitle.textContent;
@@ -67,7 +61,7 @@ closeProfilePopupButton.addEventListener('click', () => {
     closeAnyPopup(profilePopup);
 });
 
-profilePopupForm.addEventListener('submit', formSubmitHandler);
+profilePopupForm.addEventListener('submit', submitProfileForm);
 
 
 openAddCardButton.addEventListener('click', () => {
@@ -85,11 +79,15 @@ closeImage.addEventListener('click', () => {
 
 // закрытие нажатием на overlay
 
+
+
 const closePopupClickOverlay = (evt) => {
     if (evt.target.classList.contains('popup_active')) {
-        evt.target.closest('.popup').classList.remove('popup_active');
+        const popupActive = document.querySelector('.popup_active');
+        closeAnyPopup(popupActive);
     }
 }
+
 
 profilePopup.addEventListener('click', function (evt) {
     closePopupClickOverlay(evt);
@@ -105,36 +103,40 @@ popupImage.addEventListener('click', function (evt) {
 
 // функция закрытие на ESC 
 
-const pressEscapeClosePopup = (evt) => {
-    if (evt.key === 'Escape') {
-        closeAnyPopup(popupImage);
-        closeAnyPopup(popupAdd);
-        closeAnyPopup(profilePopup);
+
+
+const initialCards = [{
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-};
-
-// функция открытия попапа карточки 
-const handleCardImgClick = (evt) => {
-    popupImageOpen.src = evt.target.closest('.element__image').src;
-    popupText.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
-    popupImageOpen.alt = evt.target.closest('.element').querySelector('.element__title').textContent;
-    openAnyPopup(popupImage);
-}
-
-// функция лайка
-const handleLikeClick = (evt) => {
-    evt.target.classList.toggle('element__button_like-active')
-}
-
-// функция удаления карточки  
-const handleDeleteClick = (evt) => {
-    evt.target.closest('.element').remove();
-}
-
+];
 
 initialCards.forEach((data) => {
     renderCard(data)
 });
+
+
+
 
 function createNewCard(evt) {
     evt.preventDefault();
@@ -145,6 +147,9 @@ function createNewCard(evt) {
     closeAnyPopup(popupAdd);
     inputTitle.value = '';
     inputLink.value = '';
+    const popupSave = evt.target.querySelector('.popup__save')
+    popupSave.classList.add('popup__save_disabled');
+    popupSave.setAttribute("disabled", "disabled");
 }
 
 createNewCardButton.addEventListener('submit', createNewCard);
@@ -159,10 +164,3 @@ const newFormValidator = new FormValidator({
 });
 
 newFormValidator.enableValidation();
-
-
-export {
-    handleLikeClick,
-    handleDeleteClick,
-    handleCardImgClick
-}
