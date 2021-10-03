@@ -101,11 +101,10 @@ class FormValidator {
         const newForm = new FormValidator(config);
     };
 
-    enableValidation()
-
+    enableValidation
 }
 
-export {config, FormValidator};
+
 
 
 
