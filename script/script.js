@@ -4,6 +4,8 @@ import {
     renderCard
 } from "./Card.js";
 
+import { FormValidator } from "./FormValidator.js";
+
 
 
 const openProfilePopupButton = document.querySelector('.profile__edit');
@@ -146,6 +148,18 @@ function createNewCard(evt) {
 }
 
 createNewCardButton.addEventListener('submit', createNewCard);
+
+const newFormValidator = new FormValidator({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+});
+
+newFormValidator.enableValidation();
+
 
 export {
     handleLikeClick,
