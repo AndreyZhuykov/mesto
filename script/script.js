@@ -4,6 +4,8 @@ import {
     renderCard
 } from "./Card.js";
 
+
+
 const openProfilePopupButton = document.querySelector('.profile__edit');
 const profilePopup = document.querySelector('.popup_profile');
 const popupAdd = document.querySelector('.popup_add');
