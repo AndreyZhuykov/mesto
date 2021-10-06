@@ -2,15 +2,11 @@ import {handleCardImgClick} from "./utils.js";
 
 const elements = document.querySelector('.elements')
 
-
-
-
-
 class Card {
-    constructor(data) {
+    constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
-        this.cardElement = document.querySelector('#post').content.querySelector('.element').cloneNode(true);
+        this.cardElement = document.querySelector(templateSelector).content.querySelector('.element').cloneNode(true);
     }
 
     
@@ -19,7 +15,7 @@ class Card {
     }
 
     _handleDeleteClick = (evt) => {
-        evt.target.closest('.element').remove();
+        this._element.remove();
     }
     
 
@@ -44,16 +40,11 @@ class Card {
     }
 }
 
-function renderCard(data) {
-    const newCard = new Card(data);
-    const newCardGeneratedCard = newCard.generatedCard();
-    elements.prepend(newCardGeneratedCard);
-}
 
 
 
 
 
-export {Card, renderCard};
+export {Card};
 
 
