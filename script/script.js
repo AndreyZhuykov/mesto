@@ -43,7 +43,7 @@ const profilePopup = document.querySelector('.popup_profile');
 const popupAdd = document.querySelector('.popup_add');
 const nameTitle = document.querySelector('.profile__title');
 const infoText = document.querySelector('.profile__text');
-const popupSave = document.querySelector('.popup__save')
+const saveButtonPopupAdd = popupAdd.querySelector('.popup__save')
 const cardsContainer = document.querySelector('.elements')
 
 /// кнопки в попапе создания новой карточки 
@@ -143,8 +143,8 @@ function createNewCard(evt) {
     closeAnyPopup(popupAdd);
     inputTitle.value = '';
     inputLink.value = '';
-    popupSave.classList.add('popup__save_disabled');
-    popupSave.setAttribute("disabled", "disabled");
+    saveButtonPopupAdd.classList.add('popup__save_disabled');
+    saveButtonPopupAdd.setAttribute("disabled", "disabled");
 }
 
 createNewCardButton.addEventListener('submit', createNewCard);
