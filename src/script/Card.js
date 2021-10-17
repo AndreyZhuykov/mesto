@@ -1,12 +1,9 @@
-import {handleCardImgClick} from "./utils.js";
-
-const elements = document.querySelector('.elements')
-
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, {handleCardClick}) {
         this._name = data.name;
         this._link = data.link;
         this.cardElement = document.querySelector(templateSelector).content.querySelector('.element').cloneNode(true);
+        this._handleCardClick = handleCardClick;
     }
 
     
@@ -22,7 +19,7 @@ class Card {
     _setEventListeners() {
         this._element.querySelector('.element__button').addEventListener('click', this._handleLikeClick);
         this._element.querySelector('.element__delete').addEventListener('click', this._handleDeleteClick);
-        this._element.querySelector('.element__image').addEventListener('click', handleCardImgClick);
+        this._element.querySelector('.element__image').addEventListener('click', this._handleCardClick);
     }
 
     _getTemplate() {
