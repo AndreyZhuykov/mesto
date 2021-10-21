@@ -61,7 +61,7 @@ class FormValidator {
 
     _enableSubmitButton() {
         this._buttonElement.classList.remove(this._inactiveButtonClass);
-        this._buttonElement.removeAttribute("disabled", true);
+        this._buttonElement.removeAttribute("disabled");
     };
 
     _setEventListeners() {
