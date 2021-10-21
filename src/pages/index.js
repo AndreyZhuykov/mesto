@@ -62,7 +62,7 @@ function addCard(newCard) {
 
 const popupWithFormNewCard = new PopupWithForm(popupAdd, {
     callBackSubmitForm: (data) => {
-        createCard(data);
+        addCard(createCard(data));
         const title = document.querySelector('.element__title');
         title.textContent = inputTitle.value;
         formPopupAdd.resetValidation();
