@@ -32,7 +32,7 @@ import UserInfo from "../components/UserInfo.js";
 const userInfo = new UserInfo({
     name: nameTitle,
     info: infoText
-}, nameInput, infoInput)
+})
 const popupWithImage = new PopupWithImage(popupImage, popupImageOpen, popupText);
 const formProfilePopup = new FormValidator(config, profilePopup);
 const formPopupAdd = new FormValidator(config, popupAdd);
@@ -41,7 +41,6 @@ const createCard = (data) => {
     const newCard = new Card(data, '#post', {
         handleCardClick: () => {
             popupWithImage.open(data);
-            popupWithImage.setEventListeners();
         }
     });
     return newCard;
@@ -63,8 +62,6 @@ function addCard(newCard) {
 const popupWithFormNewCard = new PopupWithForm(popupAdd, {
     callBackSubmitForm: (data) => {
         addCard(createCard(data));
-        const title = document.querySelector('.element__title');
-        title.textContent = inputTitle.value;
         formPopupAdd.resetValidation();
         popupWithFormNewCard.close();
     }
@@ -81,9 +78,9 @@ const popupWithFormProfile = new PopupWithForm(profilePopup, {
 
 //функции открития форм
 const openPopupFormProfile = (data) => {
-    userInfo.getUserInfo(data)
-    nameInput.value = nameTitle.textContent
-    infoInput.value = infoText.textContent
+    const currentUser = userInfo.getUserInfo(data)
+    nameInput.value = currentUser.name;
+    infoInput.value = currentUser.info;
     popupWithFormProfile.open();
 }
 
@@ -96,6 +93,7 @@ section.renderItem();
 //слушатели
 popupWithFormNewCard.setEventListener();
 popupWithFormProfile.setEventListener();
+popupWithImage.setEventListeners();
 //открытие форм
 openAddCardButton.addEventListener('click', openPopupWithFormNewCard)
 openProfilePopupButton.addEventListener('click', openPopupFormProfile)
