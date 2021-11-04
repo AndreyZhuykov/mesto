@@ -1,0 +1,17 @@
+.profile__update {
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    transition: .2s;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px;
+}
+
+.profile__update:hover {
+    background-color: rgba(0, 0, 0, .6);
+    background-image: url(../../../images/Vector.svg);
+}

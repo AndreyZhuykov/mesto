@@ -47,6 +47,11 @@ const openProfilePopupButton = document.querySelector('.profile__edit');
 const nameInput = profilePopup.querySelector('.popup__input_user_name');
 const infoInput = profilePopup.querySelector('.popup__input_user_info');
 const inputTitle = popupAdd.querySelector('.popup__input_user_title');
+const userAvatar = document.querySelector('.profile__avatar');
+const popupDelete = document.querySelector('.popup_delete');
+const buttonUpdateAvatar = document.querySelector('.profile__update')
+const popupAvatar = document.querySelector('.popup_avatar')
+
 
 export {
     initialCards,
@@ -63,5 +68,9 @@ export {
     openProfilePopupButton,
     nameInput,
     infoInput,
-    inputTitle
+    inputTitle,
+    userAvatar,
+    popupDelete,
+    buttonUpdateAvatar,
+    popupAvatar
 }

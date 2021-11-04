@@ -13,7 +13,9 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="автар">
+            <button class="profile__update" type="button" aria-label="add">
+                <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="автар">
+            </button>
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <button class="profile__edit" type="button" aria-label="edit">
@@ -62,14 +64,37 @@
             <p class="popup__text"></p>
         </div>
     </section>
+    <section class="popup popup_delete">
+        <div class="popup__container">
+        <form class="popup__form" name="delete-card">
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__save" type="submit">Да</button>
+        </form>
+        <button class="popup__close" type="button" aria-label="close"></button>
+        </div>
+    </section>
+    <section class="popup popup_avatar">
+        <div class="popup__container">
+        <form class="popup__form" name="updata-avatar">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <input class="popup__input popup__input_user_link" id="input-link" type="url" name="link" placeholder="Ссылка" required>
+            <span id="input-link-error" class="popup__error"></span>
+            <button class="popup__save" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__close" type="button" aria-label="close"></button>
+        </div>
+    </section>
     <template id='post'>
         <article class="element">
             <button class="element__delete" type="button" aria-label="delete">
             </button>
             <img class="element__image" src="#" alt="#">
             <h2 class="element__title"></h2>
-            <button class="element__button" type="button" aria-label="like">
-            </button>
+            <div class="element__container-like">
+                <button class="element__button" type="button" aria-label="like">
+                </button>
+                <p class="element__likes">0</p>
+            </div>    
         </article>
     </template> 
 </body>

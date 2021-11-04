@@ -1,6 +1,5 @@
 .element__button {
-    margin-left: auto;
-    margin-right: 20px;
+    margin: 22px 0 0 0;
     border: none;
     padding: 0;
     width: 22px;
@@ -9,7 +8,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: #fff;
-    align-self: center;
+    align-self: baseline;
+    flex-basis: 30%;
     opacity: 1;
     transition: .2s;
     cursor: pointer;
