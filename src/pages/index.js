@@ -124,7 +124,7 @@ const createCard = (data) => {
 
 const popupWithFormNewCard = new PopupWithForm(popupAdd, {
     callBackSubmitForm: (data) => {
-        
+        popupWithFormNewCard.loading(true)
         api.addCardToServer(data)
         .then(res => {
             addCard(createCard(res));
