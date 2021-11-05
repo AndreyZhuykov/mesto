@@ -15,7 +15,7 @@ export default class Api {
                 authorization: this._token
             }
         }
-        return fetch(this._url(queri), option).then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+        return fetch(this._url(queri), option).then(this._checkRespons)
     }
     
     _set(queri, method, body) {
@@ -27,8 +27,15 @@ export default class Api {
             },
             body: JSON.stringify(body)
         }
-        return fetch(this._url(queri), option).then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+        return fetch(this._url(queri), option).then(this._checkRespons)
     }
+
+    _checkRespons(res) {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(console.log(`Ошибка: ${res.status}`))
+      }
 
     editProfile(name, info) {
         return this._set('users/me','PATCH' , {name, about: info});
@@ -38,7 +45,6 @@ export default class Api {
         return this._set('users/me/avatar','PATCH' , {avatar: avatar});
     }
     
-
     _getCardInfo() {
         return this._get('cards');
     }
@@ -51,16 +57,13 @@ export default class Api {
         return Promise.all([this._getUserInfo(), this._getCardInfo()])
     }
 
-
     addCardToServer({name, link}) {
         return this._set('cards','POST', {name, link});
     }
 
     deleteCardServ(data) {
-        console.log(data)
         return this._set(`cards/${data._id}`,'DELETE');
     }
-
 
     toggleLikeStatus(data, likes){
         return this._set(`cards/likes/${data._id}`, likes ? 'PUT' : 'DELETE');

@@ -6,7 +6,8 @@ export default class PopupWithForm extends Popup {
         super(popupSelector)
         this._callBackSubmitForm = callBackSubmitForm;
         this._inputList = this._popup.querySelectorAll('.popup__input')  
-        this._buttonSave = this._popup.querySelector('.popup__save')      
+        this._buttonSave = this._popup.querySelector('.popup__save')
+        this._form = this._popup.querySelector('.popup__form')      
     }
 
     _getInputValues() {
@@ -21,7 +22,6 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             this._callBackSubmitForm(this._getInputValues());
         }) 
-        console.log("hi")
     }
 
     loading(isLoading) {
@@ -34,5 +34,6 @@ export default class PopupWithForm extends Popup {
 
     close() {
         super.close();
+        this._form.reset();
     }
 }

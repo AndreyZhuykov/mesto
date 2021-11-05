@@ -80,9 +80,11 @@ class FormValidator {
 
     resetValidation() {
         this._inputList.forEach(inputElement => {
-            inputElement.value = ""
+            inputElement.addEventListener('input', () => {
+                this._checkInputValidity(inputElement);
             });
-        this._disableSubmitButton();
+        });
+        this._toggleButtonState();
     }
 
     enableValidation() {

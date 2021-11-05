@@ -22,9 +22,9 @@ class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector('.element__button').addEventListener('click', this._handleLikeClick);
-        this._element.querySelector('.element__delete').addEventListener('click', this._handleDeleteCardData);
-        this._element.querySelector('.element__image').addEventListener('click', this._handleCardClick);
+        this._buttonLike.addEventListener('click', this._handleLikeClick);
+        this._buttonDelete.addEventListener('click', this._handleDeleteCardData);
+        this._imageElement.addEventListener('click', this._handleCardClick);
     }
 
     _getTemplate() {
@@ -34,15 +34,19 @@ class Card {
     generatedCard() {
         this._element = this._getTemplate();
         this._imageElement = this._element.querySelector('.element__image')
-        this._element.querySelector('.element__delete').classList.add(
+        this._buttonLike = this._element.querySelector('.element__button')
+        this._buttonDelete = this._element.querySelector('.element__delete')
+        this._likesValue = this._element.querySelector('.element__likes')
+        
+        this._buttonDelete.classList.add(
             this._currentUserId === this._ownerId ? 'element__delete_visible' : 'element__delete_invisible'
         );
+
         this._element.querySelector('.element__title').textContent = this._name;
         this._imageElement.src = this._link;
         this._imageElement.alt = this._name;
-        this._likesValue = this._element.querySelector('.element__likes')
-        this._likesValue.textContent = this._likes.length;
-
+        
+        this._renderLikesValue();
         this._setEventListeners();
 
         return this._element;
@@ -52,14 +56,16 @@ class Card {
         return Boolean(this._likes.find(user => user._id === this._currentUserId))
     }
 
-    _updateLikes() {
-        this._likesValue = this._element.querySelector('.element__likes')
+    _renderLikesValue() {
         this._likesValue.textContent = this._likes.length;
-    
+    }
+
+    _updateLikes() {
+        this._renderLikesValue();
         if (this.checkLiked()) {
-            this._element.querySelector('.element__button').classList.add('element__button_like-active')
+            this._buttonLike.classList.add('element__button_like-active')
         } else {
-            this._element.querySelector('.element__button').classList.remove('element__button_like-active')
+            this._buttonLike.classList.remove('element__button_like-active')
         }
     }
 
