@@ -18,6 +18,7 @@ class FormValidator {
     };
 
     _hideInputError(inputElement) {
+        this._erorrElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._inputErrorClass);
         this._erorrElement.classList.remove(this._errorClass);
         this._erorrElement.textContent = '';
@@ -80,9 +81,7 @@ class FormValidator {
 
     resetValidation() {
         this._inputList.forEach(inputElement => {
-            inputElement.addEventListener('input', () => {
-                this._checkInputValidity(inputElement);
-            });
+            this._hideInputError(inputElement)
         });
         this._toggleButtonState();
     }

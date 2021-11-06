@@ -124,11 +124,10 @@ const createCard = (data) => {
 
 const popupWithFormNewCard = new PopupWithForm(popupAdd, {
     callBackSubmitForm: (data) => {
-        popupWithFormProfile.loading(true)
+        popupWithFormNewCard.loading(true)
         api.addCardToServer(data)
         .then(res => {
             addCard(createCard(res));
-            formPopupAdd.resetValidation();
             popupWithFormNewCard.close();
         })
         .catch((err) => {console.log(`Ошибка добавления карточки: ${err}`)})
@@ -171,20 +170,20 @@ const popupWithUserAvatar = new PopupWithForm(popupAvatar, {
 
 //функции открития форм
 const openPopupFormProfile = (data) => {
-    formProfilePopup.resetValidation(data);
+    formProfilePopup.resetValidation();
     const currentUser = userInfo.getUserInfo(data)
     nameInput.value = currentUser.name;
     infoInput.value = currentUser.info;
     popupWithFormProfile.open();
 }
 
-const openPopupWithFormNewCard = (data) => {
-    formPopupAdd.resetValidation(data);
+const openPopupWithFormNewCard = () => {
+    formPopupAdd.resetValidation();
     popupWithFormNewCard.open();
 }
 
-const openPopupWithUserAvatar = (data) => {
-    formPopupAvatar.resetValidation(data);
+const openPopupWithUserAvatar = () => {
+    formPopupAvatar.resetValidation();
     popupWithUserAvatar.open();
 }
 
@@ -195,6 +194,9 @@ popupWithFormProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupWithDeleteCard.setEventListeners();
 
+formProfilePopup.enableValidation();
+formPopupAdd.enableValidation();
+formPopupAvatar.enableValidation();
 
 //открытие форм
 openAddCardButton.addEventListener('click', openPopupWithFormNewCard)
@@ -202,9 +204,7 @@ openProfilePopupButton.addEventListener('click', openPopupFormProfile)
 buttonUpdateAvatar.addEventListener('click', openPopupWithUserAvatar)
 
 //валидация форм
-formProfilePopup.enableValidation();
-formPopupAdd.enableValidation();
-formPopupAvatar.enableValidation();
+
 
 
 
